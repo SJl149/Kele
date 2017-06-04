@@ -1,9 +1,8 @@
 class Kele
   include HTTParty
+  BASE_URI = "https://www.bloc.io/api/v1/sessions"
 
   def initialize(username, password)
-    base_uri = "https://www.bloc.io/api/v1/sessions"
-
     options = {
       body: {
         email: username,
@@ -14,7 +13,7 @@ class Kele
       }
     }
 
-    response = self.class.post(base_uri, options)
+    response = self.class.post(BASE_URI, options)
     @auth_token = response["auth_token"]
   end
 
