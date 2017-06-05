@@ -1,3 +1,6 @@
+require 'json'
+require 'httparty'
+
 class Kele
   include HTTParty
   include JSON
@@ -21,9 +24,8 @@ class Kele
   def get_me
     response = self.class.get(BASE_URI + "/users/me", headers: { "authorization" => @auth_token})
     json_body = response.body
-    body = JSON.parse(json_body)
-    @current_user = body["email"]
-    @current_user
+    @user_info = JSON.parse(json_body)
+    @user_info
   end
 
 end
