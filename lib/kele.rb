@@ -9,7 +9,7 @@ class Kele
         password: password
       },
       header: {
-        :content_type => 'application/json'
+        content_type: 'application/json'
       }
     }
 
