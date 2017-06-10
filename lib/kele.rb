@@ -1,6 +1,10 @@
+require 'json'
+require 'httparty'
+
 class Kele
   include HTTParty
-  BASE_URI = "https://www.bloc.io/api/v1/sessions"
+  include JSON
+  BASE_URI = "https://www.bloc.io/api/v1"
 
   def initialize(username, password)
     options = {
@@ -13,8 +17,15 @@ class Kele
       }
     }
 
-    response = self.class.post(BASE_URI, options)
+    response = self.class.post(BASE_URI + "/sessions", options)
     @auth_token = response["auth_token"]
+  end
+
+  def get_me
+    response = self.class.get(BASE_URI + "/users/me", headers: { "authorization" => @auth_token})
+    json_body = response.body
+    @user_info = JSON.parse(json_body)
+    @user_info
   end
 
 end
