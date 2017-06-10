@@ -28,4 +28,10 @@ class Kele
     @user_info
   end
 
+  def get_mentor_availability(mentor_id)
+    availability_uri = "/mentors/#{mentor_id}/student_availability"
+    response = self.class.get(BASE_URI + availability_uri, headers: { "authorization" => @auth_token})
+    json_body = response.body
+    JSON.parse(json_body)
+  end
 end
