@@ -22,25 +22,28 @@ module Messaging
     messages
   end
 
-  def create_message #(sender, recipient_id, stripped_text)
+  def create_message 
     print "Who is the sender? "
-    sender = gets
+    sender = gets.chomp
     print "What is the recipient's id? "
-    recipient_id = gets
+    recipient_id = gets.chomp
+    print "Subject? "
+    subject = gets.chomp
     print "What would you like to say? "
-    stripped_text = gets
+    stripped_text = gets.chomp
 
     options = {
       body: {
-        "sender" => sender,
-        "recipient_id" => recipient_id,
-        "stripped_text" => stripped_text
+        sender: sender,
+        recipient_id: recipient_id,
+        subject: subject,
+        "stripped-text": stripped_text
       },
       headers: {
         "authorization" => @auth_token
       }
     }
-    response = self.class.post(BASE_URI + '/messages', options )
+    response = self.class.post(BASE_URI + '/messages', options)
 
   end
 
@@ -59,5 +62,5 @@ module Messaging
     json_body = response.body
     JSON.parse(json_body)
   end
-  
+
 end

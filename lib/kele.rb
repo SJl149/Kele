@@ -29,8 +29,7 @@ class Kele
   def get_me
     response = self.class.get(BASE_URI + "/users/me", headers: { "authorization" => @auth_token})
     json_body = response.body
-    @user_info = JSON.parse(json_body)
-    @user_info
+    JSON.parse(json_body)
   end
 
   def get_mentor_availability(mentor_id)
