@@ -15,7 +15,7 @@ module Checkpoint
       }
     }
 
-    response = self.class.get(BASE_URI + "/checkpoint_submissions", options)
+    response = self.class.post(BASE_URI + "/checkpoint_submissions", options)
     json_body = response.body
     JSON.parse(json_body)
   end
