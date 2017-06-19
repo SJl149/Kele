@@ -1,13 +1,13 @@
 require 'json'
 require 'httparty'
 require './lib/roadmap'
-require './lib/messaging'
+require './lib/checkpoint'
 
 class Kele
   include HTTParty
   include JSON
   include Roadmap
-  include Messaging
+  include Checkpoint
 
   BASE_URI = "https://www.bloc.io/api/v1"
 
